@@ -66,16 +66,16 @@ h1, h2, h3, .display-title, .section-title, .card-title, .nav-logo {
 }
 
 h1, .display-title {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
 }
 
 h2, .section-title {
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 18px;
 }
 
 h3, .card-title {
-  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
   margin-bottom: 10px;
 }
 
