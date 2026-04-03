@@ -417,3 +417,15 @@ p {
     min-height: 320px;
   }
 }
+.service-card,
+.hero-card,
+.checklist-box {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.service-card:hover,
+.hero-card:hover,
+.checklist-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(46, 39, 35, 0.12);
+}
