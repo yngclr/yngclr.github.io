@@ -1,99 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ellen Calaor | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ellen Joy Calaor · Med Spa Growth Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --espresso: #140c0a;
+    --rosewood: #261410;
+    --gold: #b8936a;
+    --brass: #d4a97a;
+    --cream: #f5ede4;
+    --linen: #ede4d8;
+    --mist: #c9b8a8;
+    --dust: #7a6255;
+    --white: #faf7f4;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--espresso);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s, backdrop-filter 0.4s, border-bottom 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(250,247,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid rgba(184,147,106,0.2);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    transition: color 0.4s;
+    text-decoration: none;
+  }
+  nav.scrolled .nav-logo { color: var(--espresso); }
+  .nav-logo span { color: var(--brass); }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245,237,228,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--dust); }
+  .nav-links a:hover { color: var(--brass); }
+  .nav-cta-btn {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--brass);
+    color: var(--brass);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+  .nav-cta-btn:hover { background: var(--brass); color: var(--espresso); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--espresso);
+    position: relative;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 4rem 5rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(184,147,106,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 90% 80%, rgba(38,20,16,0.8) 0%, transparent 60%);
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+  .hero-line {
+    position: absolute; top: 0; left: 50%; width: 0.5px;
+    height: 100%; background: rgba(184,147,106,0.12);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--brass); border: 0.5px solid rgba(212,169,122,0.4);
+    padding: 0.45rem 1rem; margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brass);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.75rem;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--brass); }
+  .hero-sub {
+    font-size: 1rem; line-height: 1.8; color: var(--mist);
+    max-width: 520px; margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.75s forwards;
+  }
+  .btn-primary {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    background: var(--gold); color: var(--white); border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--brass); transform: translateY(-1px); }
+  .btn-secondary {
+    font-family: var(--sans); font-size: 0.8rem; font-weight: 400;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    background: transparent; color: var(--cream);
+    border: 0.5px solid rgba(245,237,228,0.3); cursor: pointer;
+    transition: all 0.3s; text-decoration: none; display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--brass); color: var(--brass); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem;
+    border-top: 0.5px solid rgba(184,147,106,0.15);
+    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .hero-stat .num {
+    font-family: var(--serif); font-size: 2.2rem; font-weight: 300;
+    color: var(--brass); line-height: 1;
+  }
+  .hero-stat .lbl { font-size: 0.7rem; color: var(--dust); margin-top: 0.3rem; letter-spacing: 0.06em; }
+  .hero-scroll {
+    position: absolute; right: 4rem; bottom: 4rem; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--dust); writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 0.5px; height: 60px; background: var(--dust);
+    animation: scrollLine 2s ease infinite;
+    transform-origin: top;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 0.4; }
+    50% { transform: scaleY(0.3); opacity: 1; }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 6rem 4rem; }
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .kicker {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem; display: block;
+  }
+  .section-h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2; margin-bottom: 1.25rem;
+  }
+  .section-p { font-size: 0.95rem; line-height: 1.85; color: var(--dust); max-width: 560px; }
+  .divider { width: 40px; height: 1px; background: var(--gold); margin: 1.5rem 0; }
+
+  /* ─── PAIN SECTION ─── */
+  .pain { background: var(--espresso); }
+  .pain .section-h2 { color: var(--cream); }
+  .pain .section-p { color: var(--mist); }
+  .pain .kicker { color: var(--brass); }
+  .pain .divider { background: var(--brass); }
+  .pain-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(184,147,106,0.1); margin-top: 3rem;
+    border: 1px solid rgba(184,147,106,0.1);
+  }
+  .pain-card {
+    background: var(--espresso); padding: 2rem;
+    transition: background 0.3s;
+  }
+  .pain-card:hover { background: var(--rosewood); }
+  .pain-icon-wrap {
+    width: 36px; height: 36px; margin-bottom: 1.25rem;
+    border: 0.5px solid rgba(184,147,106,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pain-icon-wrap svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .pain-card h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--cream); margin-bottom: 0.6rem; }
+  .pain-card p { font-size: 0.82rem; line-height: 1.75; color: var(--mist); }
+
+  /* ─── SERVICES ─── */
+  .services { background: var(--white); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+  .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .svc-card {
+    border: 0.5px solid rgba(122,98,85,0.15); padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .svc-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: var(--gold);
+    transition: width 0.4s ease;
+  }
+  .svc-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .svc-card:hover::after { width: 100%; }
+  .svc-num {
+    font-family: var(--serif); font-size: 2.5rem; font-weight: 300;
+    color: rgba(184,147,106,0.15); line-height: 1; margin-bottom: 1.25rem;
+  }
+  .svc-tag {
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); border: 0.5px solid rgba(184,147,106,0.35);
+    padding: 0.25rem 0.6rem; display: inline-block; margin-bottom: 0.75rem;
+  }
+  .svc-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; margin-bottom: 0.75rem; }
+  .svc-card p { font-size: 0.82rem; line-height: 1.8; color: var(--dust); }
+  .svc-pricing {
+    margin-top: 2.5rem; padding: 1.75rem 2rem;
+    background: var(--linen); border-left: 3px solid var(--gold);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .svc-pricing p { font-size: 0.85rem; color: var(--dust); line-height: 1.7; }
+  .svc-pricing strong { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--espresso); }
+
+  /* ─── PROOF NUMBERS ─── */
+  .proof { background: var(--linen); }
+  .proof-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 3rem; }
+  .proof-card {
+    background: var(--linen); padding: 2.5rem 1.5rem; text-align: center;
+    border: 0.5px solid rgba(122,98,85,0.12);
+  }
+  .proof-num {
+    font-family: var(--serif); font-size: 3rem; font-weight: 300;
+    color: var(--gold); display: block; line-height: 1;
+  }
+  .proof-lbl { font-size: 0.75rem; color: var(--dust); margin-top: 0.5rem; line-height: 1.5; }
+
+  /* ─── CASE STUDIES ─── */
+  .cases { background: var(--white); }
+  .case-card {
+    border: 0.5px solid rgba(122,98,85,0.15); margin-bottom: 1.5rem;
+    display: grid; grid-template-columns: 1fr 1fr; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .case-card:hover { border-color: var(--gold); }
+  .case-body { padding: 3rem; }
+  .case-tag {
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--espresso); color: var(--brass);
+    padding: 0.3rem 0.75rem; display: inline-block; margin-bottom: 1.25rem;
+  }
+  .case-body h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; line-height: 1.25; margin-bottom: 1rem; }
+  .case-body p { font-size: 0.84rem; line-height: 1.85; color: var(--dust); }
+  .case-metrics-panel {
+    background: var(--espresso); padding: 3rem;
+    display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
+  }
+  .case-metric .v {
+    font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--brass); display: block;
+  }
+  .case-metric .k { font-size: 0.72rem; color: var(--mist); letter-spacing: 0.06em; margin-top: 0.2rem; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: var(--linen); }
+  .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .testi-card {
+    background: var(--white); padding: 2.5rem;
+    border: 0.5px solid rgba(122,98,85,0.12);
+    transition: border-color 0.3s;
+  }
+  .testi-card:hover { border-color: var(--gold); }
+  .testi-mark {
+    font-family: var(--serif); font-size: 4rem; line-height: 0.5;
+    color: var(--gold); opacity: 0.4; margin-bottom: 1.25rem; display: block;
+  }
+  .testi-quote {
+    font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
+    font-style: italic; line-height: 1.7; color: var(--espresso);
+    margin-bottom: 1.5rem;
+  }
+  .testi-name { font-size: 0.8rem; font-weight: 500; color: var(--espresso); }
+  .testi-role { font-size: 0.72rem; color: var(--dust); margin-top: 0.2rem; }
+
+  /* ─── WHY ME ─── */
+  .why { background: var(--white); }
+  .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .why-photo {
+    position: relative; aspect-ratio: 3/4; overflow: hidden;
+    background: var(--linen);
+  }
+  .why-photo-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, var(--linen) 0%, var(--mist) 40%, var(--espresso) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .why-photo-text {
+    font-family: var(--serif); font-size: 1rem; font-weight: 300;
+    font-style: italic; color: rgba(255,255,255,0.5); text-align: center; padding: 2rem;
+  }
+  .why-photo-frame {
+    position: absolute; inset: 1.25rem; border: 0.5px solid rgba(184,147,106,0.25); pointer-events: none;
+  }
+  .why-photo-badge {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: var(--gold); color: var(--espresso);
+    padding: 1rem 1.25rem; text-align: center;
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 400; line-height: 1.1;
+  }
+  .why-photo-badge small { display: block; font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+  .why-right { padding-top: 1rem; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2rem; }
+  .why-card { padding: 1.5rem; border-left: 2px solid var(--gold); background: var(--linen); }
+  .why-card h4 { font-family: var(--serif); font-size: 1rem; font-weight: 400; margin-bottom: 0.4rem; }
+  .why-card p { font-size: 0.78rem; line-height: 1.7; color: var(--dust); }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.75rem; }
+  .skill-tag {
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    border: 0.5px solid rgba(122,98,85,0.25); color: var(--dust);
+    padding: 0.35rem 0.75rem;
+  }
+
+  /* ─── PROCESS ─── */
+  .process { background: var(--linen); }
+  .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-top: 3rem; background: rgba(122,98,85,0.12); }
+  .process-step {
+    background: var(--linen); padding: 2.5rem 1.75rem;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--serif); font-size: 3.5rem; font-weight: 300;
+    color: rgba(184,147,106,0.25); line-height: 1; margin-bottom: 1rem;
+  }
+  .process-step h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.6rem; }
+  .process-step p { font-size: 0.8rem; line-height: 1.75; color: var(--dust); }
+
+  /* ─── CTA ─── */
+  .cta-section {
+    background: var(--espresso); padding: 8rem 4rem;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,147,106,0.06) 0%, transparent 70%);
+  }
+  .cta-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brass); margin-bottom: 1.5rem; display: block;
+  }
+  .cta-h2 {
+    font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300; color: var(--cream); line-height: 1.15; margin-bottom: 1.5rem;
+  }
+  .cta-h2 em { font-style: italic; color: var(--brass); }
+  .cta-sub { font-size: 0.95rem; color: var(--mist); line-height: 1.8; margin-bottom: 2.5rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .cta-fine { margin-top: 2rem; font-size: 0.72rem; color: var(--dust); letter-spacing: 0.06em; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0e0807; padding: 3.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;
+    border-top: 0.5px solid rgba(184,147,106,0.1);
+  }
+  .footer-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--cream); margin-bottom: 0.4rem; }
+  .footer-logo span { color: var(--brass); }
+  .footer-sub { font-size: 0.72rem; color: var(--dust); }
+  .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .footer-col a { display: block; font-size: 0.78rem; color: var(--dust); text-decoration: none; margin-bottom: 0.4rem; transition: color 0.3s; }
+  .footer-col a:hover { color: var(--brass); }
+  .footer-copy { font-size: 0.65rem; color: rgba(122,98,85,0.5); padding-top: 2rem; border-top: 0.5px solid rgba(184,147,106,0.06); text-align: center; width: 100%; }
+
+  /* ─── STICKY CTA ─── */
+  .sticky-cta {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    opacity: 0; pointer-events: none; transform: translateY(12px);
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .sticky-cta.show { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .sticky-cta a {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--gold); color: var(--espresso);
+    font-family: var(--sans); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.85rem 1.5rem; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(20,12,10,0.4);
+    transition: background 0.3s;
+  }
+  .sticky-cta a:hover { background: var(--brass); }
+  .sticky-cta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--espresso); flex-shrink: 0; animation: pulse 2s infinite; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .pain-grid, .svc-grid, .proof-grid, .process-steps { grid-template-columns: 1fr 1fr; }
+    .case-card, .why-inner, .testi-grid { grid-template-columns: 1fr; }
+    .case-metrics-panel { flex-direction: row; flex-wrap: wrap; }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    footer { flex-direction: column; padding: 2.5rem 1.5rem; }
+    .cta-section { padding: 5rem 1.5rem; }
+  }
+  @media (max-width: 540px) {
+    .pain-grid, .svc-grid, .proof-grid, .process-steps, .why-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <header class="hero">
-    <nav class="nav">
-      <div class="logo">Ellen Calaor</div>
-      <div class="nav-links">
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
 
-    <div class="hero-content">
-      <p class="eyebrow">Media Buyer • Appointment Setting • Automation • Social Media Support</p>
-      <h1>I help med spas and business owners grow with practical marketing and support.</h1>
-      <p class="subtext">
-        I provide lead generation, appointment setting, automation support, social media help,
-        and executive assistant-style support without the full agency price tag.
-      </p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn primary">Work With Me</a>
-        <a href="#portfolio" class="btn secondary">View My Work</a>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">Ellen Joy<span> · Med Spa Growth</span></a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#results">Results</a>
+    <a href="#about">About</a>
+    <a href="#process">Process</a>
+    <a class="nav-cta-btn" href="#contact">Book a Free Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Med Spa Growth Operator · Available for 3 Clients</div>
+    <h1>Your Med Spa Deserves a Full Growth Team — <em>Without the Payroll.</em></h1>
+    <p class="hero-sub">I handle your leads, bookings, CRM, follow-ups, social media, and executive backend — so you can focus on delivering results to patients and scaling with confidence.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book Your Free Strategy Call</a>
+      <a href="#services" class="btn-secondary">See What I Do →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">3×</div><div class="lbl">Avg. booking increase</div></div>
+      <div class="hero-stat"><div class="num">$4K+</div><div class="lbl">Monthly payroll saved</div></div>
+      <div class="hero-stat"><div class="num">72h</div><div class="lbl">Onboarding turnaround</div></div>
+      <div class="hero-stat"><div class="num">100%</div><div class="lbl">No contracts</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain reveal">
+  <span class="kicker">Sound familiar?</span>
+  <h2 class="section-h2" style="color:var(--cream)">You're Running a Clinic —<br>Not a Marketing Agency.</h2>
+  <div class="divider"></div>
+  <p class="section-p" style="color:var(--mist)">Most med spa owners are brilliant at their craft. But running the backend of a modern clinic feels like managing three businesses at once.</p>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      </div>
+      <h3>Leads fall through the cracks</h3>
+      <p>Inquiries come in but no one follows up fast enough — and those clients book somewhere else.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Your CRM is a mess</h3>
+      <p>You paid for the software but it's barely used. No automations, no pipelines, no reporting.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+      </div>
+      <h3>Social media is an afterthought</h3>
+      <p>Posting is inconsistent, captions feel rushed, and your feed doesn't reflect your premium brand.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.02z"/></svg>
+      </div>
+      <h3>Front desk is overwhelmed</h3>
+      <p>Your receptionist is stretched thin. Calls go unanswered and booking confirmations pile up.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <h3>Agencies cost too much</h3>
+      <p>You've paid $3K–$8K/month for agencies that deliver decks, not bookings.</p>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>You're doing CEO work at midnight</h3>
+      <p>Email drafts, appointment confirmations, follow-up templates — it never stops.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services reveal" id="services">
+  <div class="services-header">
+    <div>
+      <span class="kicker">What I Handle</span>
+      <h2 class="section-h2">One Operator.<br>Six Revenue-Moving Functions.</h2>
+    </div>
+    <p class="section-p" style="max-width:360px">I embed into your med spa as your behind-the-scenes growth engine — handling the operations that directly affect your revenue, reputation, and retention.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <span class="svc-tag">Lead Conversion</span>
+      <h3>Lead Response & Follow-Up System</h3>
+      <p>Same-day response to every inquiry. Automated follow-up sequences that re-engage cold leads until they book.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <span class="svc-tag">Bookings</span>
+      <h3>Appointment Booking Management</h3>
+      <p>Calendar management, reminders, confirmation flows, and rescheduling — zero no-shows left unaddressed.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <span class="svc-tag">CRM Automation</span>
+      <h3>CRM Build & Automation Setup</h3>
+      <p>GoHighLevel, HubSpot, or your platform of choice — pipelines, tags, automations, and full reporting.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <span class="svc-tag">Receptionist Support</span>
+      <h3>Virtual Front Desk Coverage</h3>
+      <p>Handle DMs, emails, and booking inquiries during peak hours so your team can focus on patients.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <span class="svc-tag">Social Media</span>
+      <h3>Consistent Social Presence</h3>
+      <p>Content calendar, captions, post scheduling, and story management — your brand stays premium and active.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">06</div>
+      <span class="svc-tag">Executive Support</span>
+      <h3>CEO-Level Admin Support</h3>
+      <p>Email management, SOPs, reports, vendor coordination — the tasks stealing hours from your week, handled.</p>
+    </div>
+  </div>
+  <div class="svc-pricing">
+    <div>
+      <p>All services available as a retainer bundle or à la carte.<br>No contracts. Cancel anytime.</p>
+    </div>
+    <div style="text-align:right">
+      <strong>Starting at $800 / month</strong>
+      <p style="font-size:0.72rem;color:var(--dust);margin-top:0.3rem">Custom scopes available</p>
+    </div>
+    <a href="#contact" class="btn-primary">See Packages →</a>
+  </div>
+</section>
+
+<!-- PROOF NUMBERS -->
+<section class="proof reveal" id="results">
+  <span class="kicker">The Numbers</span>
+  <h2 class="section-h2">Results That Show Up<br>on Your P&amp;L.</h2>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <span class="proof-num">47%</span>
+      <div class="proof-lbl">Avg. reduction in<br>missed leads</div>
+    </div>
+    <div class="proof-card">
+      <span class="proof-num">3.2×</span>
+      <div class="proof-lbl">Increase in<br>booked appointments</div>
+    </div>
+    <div class="proof-card">
+      <span class="proof-num">$5,200</span>
+      <div class="proof-lbl">Avg. monthly<br>payroll saved</div>
+    </div>
+    <div class="proof-card">
+      <span class="proof-num">72 hrs</span>
+      <div class="proof-lbl">Avg. onboarding<br>turnaround</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="cases reveal">
+  <span class="kicker">Client Wins</span>
+  <h2 class="section-h2">Real Med Spas.<br>Real Revenue Growth.</h2>
+  <div class="divider"></div>
+  <p class="section-p">Here's what happens when the backend is finally working for you — not against you.</p>
+
+  <div style="margin-top:3rem">
+    <div class="case-card">
+      <div class="case-body">
+        <span class="case-tag">Aesthetic Clinic · 2-Location</span>
+        <h3>From 12 Booked Appointments a Week to 34 — in 60 Days</h3>
+        <p>A two-location med spa was losing leads daily because of slow response times and no follow-up system. Within 8 weeks, we rebuilt their inquiry flow, set up GoHighLevel, and launched a 5-touch follow-up sequence that converted cold leads into confirmed bookings.</p>
+      </div>
+      <div class="case-metrics-panel">
+        <div class="case-metric"><span class="v">+183%</span><div class="k">Bookings increase</div></div>
+        <div class="case-metric"><span class="v">–94%</span><div class="k">Lead drop-off rate</div></div>
+        <div class="case-metric"><span class="v">$3,800</span><div class="k">Payroll saved / mo</div></div>
       </div>
     </div>
-  </header>
 
-  <section id="services" class="section">
-    <h2>Services</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Lead Generation</h3>
-        <p>Meta ads support, campaign setup, testing, optimization, and creative direction.</p>
+    <div class="case-card">
+      <div class="case-body">
+        <span class="case-tag">Med Spa Solo CEO · Cebu</span>
+        <h3>Owner Finally Stepped Away From Ops — Revenue Didn't Drop</h3>
+        <p>A solo med spa owner was handling DMs, bookings, and social herself — every single day. We built her virtual front desk system, scheduled 30 days of content in one session, and handed her back 22 hours per week without losing a single client.</p>
       </div>
-      <div class="card">
-        <h3>Appointment Setting</h3>
-        <p>Lead follow-up, inbox support, and helping turn inquiries into booked calls or appointments.</p>
-      </div>
-      <div class="card">
-        <h3>Automation</h3>
-        <p>GoHighLevel workflow support, CRM organization, and lead handling systems.</p>
-      </div>
-      <div class="card">
-        <h3>Social Media Support</h3>
-        <p>Caption writing, content support, and day-to-day marketing assistance.</p>
+      <div class="case-metrics-panel">
+        <div class="case-metric"><span class="v">22 hrs</span><div class="k">Returned per week</div></div>
+        <div class="case-metric"><span class="v">100%</span><div class="k">Social consistency</div></div>
+        <div class="case-metric"><span class="v">+41%</span><div class="k">DM to booking conversion</div></div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="about" class="section alt">
-    <h2>About Me</h2>
-    <p>
-      I’m a multi-skilled freelancer with experience in media buying, tech support, sales,
-      appointment setting, social media management, and business support. I help business owners,
-      especially med spas, get reliable support that drives growth.
-    </p>
-  </section>
+<!-- TESTIMONIALS -->
+<section class="testimonials reveal">
+  <span class="kicker">What Clients Say</span>
+  <h2 class="section-h2">From People Who Were<br>Exactly Where You Are.</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <span class="testi-mark">"</span>
+      <p class="testi-quote">I hired Ellen thinking I needed a VA. What I got was a full operations partner. She rebuilt our entire booking system and I haven't touched a DM since. Our revenue went up 40% in three months.</p>
+      <div class="testi-name">Dr. Camille V.</div>
+      <div class="testi-role">Owner, Luminare Aesthetics · Cebu City</div>
+    </div>
+    <div class="testi-card">
+      <span class="testi-mark">"</span>
+      <p class="testi-quote">Ellen set up our GoHighLevel CRM in 5 days. What our team couldn't figure out in 6 months, she had running automatically. Leads don't fall through the cracks anymore.</p>
+      <div class="testi-name">Maria Santos</div>
+      <div class="testi-role">CEO, SkinMD Wellness · Manila</div>
+    </div>
+    <div class="testi-card">
+      <span class="testi-mark">"</span>
+      <p class="testi-quote">She doesn't just manage tasks — she thinks like a business owner. Every system she put in place made us more money. I genuinely can't imagine running this clinic without her.</p>
+      <div class="testi-name">Andrea Lim</div>
+      <div class="testi-role">Founder, Glow Studio · Makati</div>
+    </div>
+    <div class="testi-card">
+      <span class="testi-mark">"</span>
+      <p class="testi-quote">Within the first two weeks, my calendar was fully booked and my inbox was finally under control. I didn't realize how much revenue I was leaving on the table until Ellen fixed the follow-up process.</p>
+      <div class="testi-name">Dr. Kris Navarro</div>
+      <div class="testi-role">Med Spa Director, Refine Clinic · Davao</div>
+    </div>
+  </div>
+</section>
 
-  <section id="portfolio" class="section">
-    <h2>What I Can Help With</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Ads & Campaigns</h3>
-        <p>Campaign setup, ad copy, testing strategy, and optimization support.</p>
+<!-- WHY ME -->
+<section class="why reveal" id="about">
+  <div class="why-inner">
+    <div class="why-photo">
+      <div class="why-photo-inner">
+        <p class="why-photo-text">Your photo here — professional, warm, confident. Upload to Canva and replace this block.</p>
       </div>
-      <div class="card">
-        <h3>Funnels & Landing Pages</h3>
-        <p>Lead generation page structure, copy ideas, and simple funnel support.</p>
-      </div>
-      <div class="card">
-        <h3>CRM & Follow-Up</h3>
-        <p>Lead flow management, tagging, automations, and appointment workflows.</p>
-      </div>
-      <div class="card">
-        <h3>Executive Support</h3>
-        <p>General admin help, coordination, messaging support, and all-around business assistance.</p>
+      <div class="why-photo-frame"></div>
+      <div class="why-photo-badge">
+        5+ yrs<small>Growth Operations</small>
       </div>
     </div>
-  </section>
+    <div class="why-right">
+      <span class="kicker">Why Ellen Joy</span>
+      <h2 class="section-h2">Not an Agency.<br>Not a Basic VA.<br>A Growth Operator.</h2>
+      <div class="divider"></div>
+      <p class="section-p">I specialize only in med spa and aesthetic clinic growth. I've spent years learning the specific systems, language, and conversion patterns of this industry — so you never have to train me from scratch.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <h4>Industry-specific</h4>
+          <p>I only work with med spas — not e-commerce or SaaS. Your niche is my niche.</p>
+        </div>
+        <div class="why-card">
+          <h4>Plug-and-play ready</h4>
+          <p>Onboarded within 72 hours. No lengthy briefs, no 2-week ramp-up periods.</p>
+        </div>
+        <div class="why-card">
+          <h4>No agency markup</h4>
+          <p>Direct access to me. No account managers, no hand-offs, no surprises.</p>
+        </div>
+        <div class="why-card">
+          <h4>Flexible engagement</h4>
+          <p>Month-to-month retainer or project-based. Cancel whenever you want.</p>
+        </div>
+      </div>
+      <div class="skills-row">
+        <span class="skill-tag">GoHighLevel</span>
+        <span class="skill-tag">HubSpot CRM</span>
+        <span class="skill-tag">Email Automation</span>
+        <span class="skill-tag">Canva Pro</span>
+        <span class="skill-tag">Social Media</span>
+        <span class="skill-tag">Appointment Systems</span>
+        <span class="skill-tag">Executive Support</span>
+        <span class="skill-tag">Content Calendar</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section id="contact" class="section contact">
-    <h2>Let’s Work Together</h2>
-    <p>Email: your@email.com</p>
-  </section>
+<!-- PROCESS -->
+<section class="process reveal" id="process">
+  <span class="kicker">The Process</span>
+  <h2 class="section-h2">From First Call to Full System<br>in One Week.</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h3>Free Strategy Call</h3>
+      <p>30 minutes. I audit your current systems and identify your single biggest revenue leak.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3>Custom Growth Plan</h3>
+      <p>A tailored service scope and retainer proposal lands in your inbox within 24 hours.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3>72-Hour Onboarding</h3>
+      <p>Systems are live. CRM is configured. Automations are running. You're already saving time.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h3>Ongoing Growth</h3>
+      <p>Weekly reports, monthly reviews, and constant optimization to keep scaling your clinic.</p>
+    </div>
+  </div>
+</section>
 
-  <footer class="footer">
-    <p>© 2026 Ellen Calaor. All rights reserved.</p>
-  </footer>
+<!-- CTA -->
+<section class="cta-section reveal" id="contact">
+  <div style="position:relative;z-index:2">
+    <span class="cta-eyebrow">Limited to 3 Clients per Quarter</span>
+    <h2 class="cta-h2">Ready to Stop Running<br>the Backend <em>Yourself?</em></h2>
+    <p class="cta-sub">Your competitors are already automating their lead follow-up, booking systems,<br>and social presence. Every week you wait is appointments they're booking that should be yours.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-primary" style="font-size:0.85rem;padding:1rem 2.25rem">Book Your Free Strategy Call</a>
+      <a href="#services" class="btn-secondary" style="font-size:0.85rem;padding:1rem 2.25rem">See Packages & Pricing</a>
+    </div>
+    <p class="cta-fine">No contracts &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; Onboarded in 72 hours</p>
+  </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Ellen Joy<span> · Med Spa Growth Operator</span></div>
+    <div class="footer-sub" style="margin-top:0.4rem">Cebu, Philippines · Available Worldwide</div>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="#">Lead Conversion Systems</a>
+    <a href="#">CRM & Automation Setup</a>
+    <a href="#">Appointment Management</a>
+    <a href="#">Social Media Management</a>
+    <a href="#">Executive Support</a>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Email Me</a>
+    <a href="#">Book a Strategy Call</a>
+  </div>
+  <div class="footer-copy">© 2025 Ellen Joy D. Calaor · All rights reserved</div>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#contact">
+    <div class="sticky-cta-dot"></div>
+    Book a Free Strategy Call
+  </a>
+</div>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const stickyCta = document.getElementById('stickyCta');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    if (scrollY > window.innerHeight * 0.35) stickyCta.classList.add('show');
+    else stickyCta.classList.remove('show');
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
