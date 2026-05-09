@@ -1,130 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ellen Joy Calaor</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ellen Joy Calaor | Fractional Growth & Operations Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0b1120;
+    --navy-mid:#131c30;
+    --navy-light:#1e2d48;
+    --gold:#c8a96e;
+    --gold-light:#e8d5a8;
+    --cream:#f7f2ea;
+    --cream-dark:#ede6d8;
+    --white:#ffffff;
+    --text-muted:#8a96a8;
+    --border:#2a3a55;
+    --font-display:'Cormorant Garamond',Georgia,serif;
+    --font-body:'Outfit',sans-serif;
+    --transition:0.35s cubic-bezier(.4,0,.2,1);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);background:var(--cream);color:var(--navy);overflow-x:hidden;line-height:1.6}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(247,242,234,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(11,17,32,0.08);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:68px;transition:var(--transition)}
+  nav.scrolled{background:rgba(247,242,234,0.98);box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+  .nav-logo{display:flex;align-items:center;gap:10px}
+  .nav-logo img{height:38px;object-fit:contain}
+  .nav-links{display:flex;align-items:center;gap:2rem}
+  .nav-links a{font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--navy);text-decoration:none;opacity:0.7;transition:var(--transition)}
+  .nav-links a:hover{opacity:1;color:var(--gold)}
+  .nav-cta{background:var(--navy);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;transition:var(--transition)}
+  .nav-cta:hover{background:var(--gold);color:var(--navy)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--navy);transition:var(--transition)}
+  .mobile-menu{display:none;position:fixed;inset:68px 0 0;background:var(--cream);z-index:99;padding:2rem;flex-direction:column;gap:1.5rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:18px;font-weight:500;text-decoration:none;color:var(--navy);border-bottom:1px solid rgba(11,17,32,0.1);padding-bottom:1rem}
 
-  <link rel="stylesheet" href="style.css">
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:100px 6rem 60px;gap:4rem;background:var(--navy);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(200,169,110,0.08) 0%,transparent 70%)}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;border:1px solid rgba(200,169,110,0.3);padding:6px 16px;border-radius:2px}
+  .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1.2rem}
+  .hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,5vw,4.2rem);font-weight:500;color:var(--cream);line-height:1.1;margin-bottom:1.5rem}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero-desc{font-size:1rem;color:rgba(247,242,234,0.65);max-width:440px;line-height:1.75;margin-bottom:2.5rem}
+  .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px 32px;border-radius:2px;text-decoration:none;transition:var(--transition)}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .btn-primary svg{width:14px;height:14px;transition:var(--transition)}
+  .btn-primary:hover svg{transform:translateX(4px)}
+  .hero-image{position:relative;display:flex;justify-content:center}
+  .hero-image::before{content:'';position:absolute;inset:-20px;border:1px solid rgba(200,169,110,0.15);border-radius:4px}
+  .hero-image img{width:100%;max-width:480px;height:560px;object-fit:cover;object-position:center top;border-radius:3px;filter:brightness(0.95)}
+  .hero-image-card{position:absolute;bottom:30px;left:-20px;background:rgba(11,17,32,0.9);border:1px solid rgba(200,169,110,0.2);padding:16px 20px;border-radius:4px;backdrop-filter:blur(10px)}
+  .hero-image-card p{font-size:11px;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+  .hero-image-card strong{font-size:14px;color:var(--cream);font-weight:500}
+
+  /* SECTION SHARED */
+  section{padding:90px 6rem}
+  .section-tag{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:block}
+  .section-title{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:500;line-height:1.15;color:var(--navy)}
+  .section-title em{font-style:italic;color:var(--gold)}
+  .section-subtitle{font-size:1rem;color:rgba(11,17,32,0.55);max-width:560px;margin-top:1rem;line-height:1.75}
+
+  /* WHO I WORK WITH */
+  .who{background:var(--cream)}
+  .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:3.5rem}
+  .who-text .section-title{margin-bottom:1.2rem}
+  .who-text p{color:rgba(11,17,32,0.6);line-height:1.8;font-size:0.97rem}
+  .who-divider{width:40px;height:2px;background:var(--gold);margin-bottom:1.5rem}
+  .who-pillars-label{font-family:var(--font-display);font-size:1.8rem;font-weight:500;color:var(--navy);line-height:1.2;margin-top:3rem}
+  .who-pillars-label em{color:var(--gold);font-style:italic}
+
+  /* SERVICES */
+  .services{background:var(--navy);padding:90px 6rem}
+  .services .section-tag{color:var(--gold)}
+  .services .section-title{color:var(--cream)}
+  .services-desc{color:rgba(247,242,234,0.5);max-width:600px;margin-top:1rem;line-height:1.75;font-size:0.96rem}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:4rem;background:rgba(255,255,255,0.07)}
+  .service-card{background:var(--navy-mid);padding:2.5rem 2rem;transition:var(--transition);position:relative;overflow:hidden}
+  .service-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:var(--transition)}
+  .service-card:hover::before{transform:scaleX(1)}
+  .service-card:hover{background:var(--navy-light)}
+  .service-card.custom{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2rem;padding:2rem 2.5rem}
+  .service-num{font-family:var(--font-display);font-size:3rem;font-weight:400;color:rgba(200,169,110,0.25);line-height:1;margin-bottom:1rem}
+  .service-card h3{font-family:var(--font-display);font-size:1.25rem;font-weight:500;color:var(--cream);margin-bottom:0.75rem;line-height:1.3}
+  .service-card p{font-size:0.88rem;color:rgba(247,242,234,0.5);line-height:1.7;margin-bottom:1.2rem}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.3);padding:3px 10px;border-radius:2px}
+  .service-plus{font-family:var(--font-display);font-size:3rem;color:rgba(200,169,110,0.3)}
+  .service-card.custom h3{font-size:1.5rem;color:var(--cream)}
+  .service-card.custom p{margin:0;font-size:0.9rem}
+  .btn-outline{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(200,169,110,0.4);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:12px 24px;border-radius:2px;text-decoration:none;transition:var(--transition);white-space:nowrap}
+  .btn-outline:hover{background:var(--gold);color:var(--navy)}
+
+  /* PROCESS */
+  .process{background:var(--cream-dark)}
+  .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;position:relative}
+  .process-grid::before{content:'';position:absolute;top:28px;left:calc(12.5% + 8px);right:calc(12.5% + 8px);height:1px;background:linear-gradient(90deg,var(--gold) 0%,rgba(200,169,110,0.2) 100%)}
+  .process-step{padding:0 1.5rem;text-align:center}
+  .step-num{width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:var(--font-display);font-size:1.3rem;font-weight:500;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;position:relative;z-index:1;border:3px solid var(--cream-dark)}
+  .process-step h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--navy);margin-bottom:0.75rem}
+  .process-step p{font-size:0.87rem;color:rgba(11,17,32,0.55);line-height:1.7}
+
+  /* WHY */
+  .why{background:var(--cream)}
+  .why-subtitle{color:rgba(11,17,32,0.55);max-width:540px;margin-top:1rem;line-height:1.75;font-size:0.96rem}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+  .why-card{background:var(--white);border:1px solid rgba(11,17,32,0.08);padding:2rem;border-radius:4px;transition:var(--transition)}
+  .why-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(11,17,32,0.08);border-color:rgba(200,169,110,0.3)}
+  .why-icon{font-size:1.8rem;margin-bottom:1rem;display:block}
+  .why-card h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--navy);margin-bottom:0.75rem}
+  .why-card p{font-size:0.88rem;color:rgba(11,17,32,0.55);line-height:1.75}
+
+  /* TOOLS */
+  .tools{background:var(--navy-mid);padding:90px 6rem}
+  .tools .section-tag{color:var(--gold)}
+  .tools .section-title{color:var(--cream)}
+  .tools-subtitle{color:rgba(247,242,234,0.45);margin-top:0.8rem;font-size:0.96rem}
+  .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3.5rem}
+  .tools-col{background:var(--navy);border:1px solid rgba(255,255,255,0.06);padding:2rem;border-radius:4px}
+  .tools-col h4{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid rgba(200,169,110,0.15)}
+  .tools-col ul{list-style:none}
+  .tools-col li{font-size:0.88rem;color:rgba(247,242,234,0.6);padding:5px 0;display:flex;align-items:center;gap:8px}
+  .tools-col li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0.5;flex-shrink:0}
+
+  /* CONTACT / CTA */
+  .cta{background:var(--navy);padding:100px 6rem;text-align:center;position:relative;overflow:hidden}
+  .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(200,169,110,0.07) 0%,transparent 70%)}
+  .cta .section-tag{text-align:center;display:block}
+  .cta .section-title{color:var(--cream);text-align:center;max-width:700px;margin:0 auto 1rem}
+  .cta-desc{color:rgba(247,242,234,0.5);max-width:560px;margin:0 auto 2.5rem;font-size:0.97rem;line-height:1.75}
+  .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:4rem}
+  .btn-gold{background:var(--gold);color:var(--navy);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:14px 32px;border-radius:2px;text-decoration:none;transition:var(--transition)}
+  .btn-gold:hover{background:var(--gold-light)}
+  .btn-wa{background:transparent;border:1px solid rgba(200,169,110,0.35);color:var(--gold);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:14px 32px;border-radius:2px;text-decoration:none;transition:var(--transition)}
+  .btn-wa:hover{background:rgba(200,169,110,0.1)}
+  .contact-info{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:860px;margin:0 auto;position:relative;z-index:1}
+  .contact-info-item{text-align:center}
+  .contact-info-item .label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem}
+  .contact-info-item .value{font-size:0.9rem;color:var(--cream-dark)}
+  .contact-info-item a{color:var(--gold);text-decoration:none}
+  .contact-info-item a:hover{color:var(--gold-light)}
+
+  /* FOOTER */
+  footer{background:var(--navy);border-top:1px solid rgba(255,255,255,0.05);padding:1.5rem 6rem;display:flex;align-items:center;justify-content:space-between}
+  footer p{font-size:12px;color:rgba(247,242,234,0.3);letter-spacing:0.04em}
+  footer img{height:28px;opacity:0.4}
+
+  /* SCROLL ANIMATIONS */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal-delay-1{transition-delay:0.1s}
+  .reveal-delay-2{transition-delay:0.2s}
+  .reveal-delay-3{transition-delay:0.3s}
+  .reveal-delay-4{transition-delay:0.4s}
+
+  /* RESPONSIVE */
+  @media(max-width:1100px){
+    section,nav{padding-left:3rem;padding-right:3rem}
+    .hero{padding:100px 3rem 60px;gap:3rem}
+    .services{padding:90px 3rem}
+    .tools{padding:90px 3rem}
+    .cta{padding:90px 3rem}
+    footer{padding:1.5rem 3rem}
+    .services-grid{grid-template-columns:repeat(2,1fr)}
+    .service-card.custom{grid-column:auto}
+    .tools-grid{grid-template-columns:repeat(2,1fr)}
+    .contact-info{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:768px){
+    .nav-links,.nav-cta{display:none}
+    .hamburger{display:flex}
+    .hero{grid-template-columns:1fr;padding:90px 1.5rem 60px;text-align:center}
+    .hero-desc{margin:0 auto 2.5rem}
+    .hero-image{display:none}
+    section{padding:60px 1.5rem}
+    .services,.tools,.cta{padding:60px 1.5rem}
+    footer{padding:1.5rem}
+    .who-grid,.services-grid{grid-template-columns:1fr}
+    .process-grid{grid-template-columns:repeat(2,1fr)}
+    .process-grid::before{display:none}
+    .why-grid,.tools-grid,.contact-info{grid-template-columns:1fr}
+    .service-card.custom{grid-template-columns:1fr;text-align:center}
+    footer{flex-direction:column;gap:1rem;text-align:center}
+  }
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="portfolio.html">Portfolio</a>
-    <a href="services.html">Services</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-<main>
-  <section class="hero section">
-    <div class="page-width hero-grid">
-      <div class="hero-copy stack-lg">
-        <div class="eyebrow">ELLEN JOY CALAOR</div>
-        <h1 class="display-title">Growth &amp; Operations Partner<br>Med Spas &amp; Service Brands</h1>
-        <p>
-          You didn’t build your brand to be buried in backend admin or stressing over unworked leads.
-          I partner with service-based founders to build the marketing systems, follow-up workflows,
-          and operational structures that turn clicks into booked appointments—so you can step back into the CEO seat.
-        </p>
-        <div>
-          <a href="https://tally.so/r/ODYovR" class="btn btn-primary">Book a Strategy Call</a>
-        </div>
-      </div>
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <img src="https://d1yei2z3i6k35z.cloudfront.net/17256137/69e9fc868f2f22.27209578_MyLogo.png" alt="Ellen Joy Calaor Logo" />
+  </a>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">My Portfolio</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="#contact">Get in Touch</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-      <div class="hero-visual">
-        <div class="hero-card">
-          <div class="hero-card-label">Built for growing brands</div>
-          <div class="hero-card-title">Front-end growth. Back-end systems. Real support that helps you scale.</div>
-        </div>
-      </div>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#portfolio" onclick="toggleMenu()">My Portfolio</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Get in Touch</div>
+    <p class="hero-eyebrow">Fractional Growth &amp; Operations Partner</p>
+    <h1>
+      The one person<br />
+      your business<br />
+      <em>has been missing.</em>
+    </h1>
+    <p class="hero-desc">I help founders, CEOs, and growing businesses generate leads, build systems, automate follow-up, and keep operations moving — all in one reliable partner.</p>
+    <a class="btn-primary" href="#contact">
+      Let's Work Together
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="hero-image">
+    <img src="https://d1yei2z3i6k35z.cloudfront.net/17256137/69e1322eed8b79.84405224_ChatGPTImageApr15202608_33_06PM.png" alt="Ellen Joy Calaor" />
+    <div class="hero-image-card">
+      <p>Availability</p>
+      <strong>Open to New Clients</strong>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section-soft">
-    <div class="page-width value-grid">
-      <div class="stack-lg">
-        <div class="eyebrow">The value I bring</div>
-        <h2 class="section-title">More than support. I help your business run better.</h2>
-        <p>
-          Bridging the gap between front-end marketing and back-end systems. I ensure your business runs
-          like a high-converting machine by managing the crucial touchpoints—from Meta Ads and appointment
-          setting to CRM automations and executive support. Let’s scale your revenue, not your daily grind.
-        </p>
-        <a href="https://tally.so/r/ODYovR" class="btn btn-secondary">Let’s work together</a>
-      </div>
-
-      <div class="checklist-box">
-        <h3 class="card-title">You’re in the right place if:</h3>
-        <ul class="checklist">
-          <li>You are a med spa or service founder ready to scale.</li>
-          <li>You want a dedicated partner, not just another expensive agency.</li>
-          <li>You are ready to plug the leaks in your lead follow-up process.</li>
-          <li>You want to automate your backend to maximize productivity.</li>
-          <li>You need high-level executive support to reclaim your time.</li>
-          <li>You are focused on reducing no-shows and driving client retention.</li>
-        </ul>
-      </div>
+<!-- WHO I WORK WITH -->
+<section class="who" id="about">
+  <div class="who-grid">
+    <div class="who-text reveal">
+      <span class="section-tag">Who I Work With</span>
+      <div class="who-divider"></div>
+      <h2 class="section-title">Built for busy owners<br /><em>who need execution,</em><br />not more overhead.</h2>
+      <p style="margin-top:1.2rem">You're running a business, not looking to manage a five-person team just to get things done. You need one trusted person who understands the full picture: your marketing, your systems, your clients, and your growth goals.</p>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="page-width stack-lg">
-      <div class="eyebrow">Ways I can help</div>
-      <h2 class="section-title">Which level of support is right for you?</h2>
-
-      <div class="cards-3">
-        <article class="service-card">
-          <h3 class="card-title">Backend Systems &amp; Executive Support</h3>
-          <p>
-            From GoHighLevel CRM automations to inbox management and daily operational support.
-            I organize the chaos so your business runs seamlessly behind the scenes.
-          </p>
-          <a href="services.html" class="service-link">Explore Operations &gt;</a>
-        </article>
-
-        <article class="service-card">
-          <h3 class="card-title">Growth &amp; Client Acquisition</h3>
-          <p>
-            Keeping your pipeline full. I handle targeted Meta Ads management, landing page optimization,
-            and strategic social media to attract your ideal, high-paying clients.
-          </p>
-          <a href="services.html" class="service-link">Explore Growth &gt;</a>
-        </article>
-
-        <article class="service-card">
-          <h3 class="card-title">Revenue Operations &amp; Booking</h3>
-          <p>
-            Leads mean nothing if they don’t book. I implement dedicated appointment setting, flawless
-            follow-up workflows, and no-show reduction systems that turn interest into income.
-          </p>
-          <a href="services.html" class="service-link">Explore Conversions &gt;</a>
-        </article>
-      </div>
+    <div class="reveal reveal-delay-2">
+      <h3 class="who-pillars-label">Five pillars.<br /><em>One reliable partner.</em></h3>
+      <p style="margin-top:1.2rem;color:rgba(11,17,32,0.55);font-size:0.95rem;line-height:1.75">I don't do one thing. I bridge the gap between your vision and execution — from the first lead to the booked call and everything in between.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section section-soft">
-    <div class="page-width contact-block">
-      <div class="stack-md">
-        <div class="eyebrow">Get in touch</div>
-        <h2 class="section-title">Let’s build the systems that help your business scale.</h2>
-        <p>
-          Ready to elevate your operations without the agency fees? Fill out this quick form and let’s
-          discuss how we can build the systems to scale your business.
-        </p>
-      </div>
-
-      <div class="contact-actions stack-md">
-        <a href="https://tally.so/r/ODYovR" class="btn btn-primary">Book a Strategy Call</a>
-        <a href="mailto:ellenjoydcalaor@gmail.com" class="email-link">ellenjoydcalaor@gmail.com</a>
-      </div>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <span class="section-tag reveal">Five Pillars</span>
+  <h2 class="section-title reveal">Five pillars. <em>One reliable partner.</em></h2>
+  <p class="services-desc reveal">I don't just complete tasks — I build repeatable systems and execute with precision across every area your business needs.</p>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <h3>Lead Generation &amp; Meta Ads</h3>
+      <p>Strategy, creative direction, campaign launch, and performance optimization.</p>
+      <div class="tags"><span class="tag">Meta Ads</span><span class="tag">Targeting</span><span class="tag">Retargeting</span></div>
     </div>
-  </section>
-</main>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <h3>Funnels, GHL &amp; Automations</h3>
+      <p>Landing pages, CRM workflows, nurture sequences, and pipeline automations.</p>
+      <div class="tags"><span class="tag">GoHighLevel</span><span class="tag">Funnels</span><span class="tag">Workflows</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <h3>Appointment Setting &amp; Sales Support</h3>
+      <p>Lead qualification, follow-up systems, booking support, and pipeline nurturing.</p>
+      <div class="tags"><span class="tag">CRM</span><span class="tag">SMS</span><span class="tag">Email</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <h3>Executive Assistance &amp; Project Management</h3>
+      <p>Task coordination, reporting, documentation, and client communication.</p>
+      <div class="tags"><span class="tag">ClickUp</span><span class="tag">Notion</span><span class="tag">Reporting</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">05</div>
+      <h3>Backend Operations &amp; Workflow Systems</h3>
+      <p>SOPs, troubleshooting, CRM hygiene, AI tools, and backend optimization.</p>
+      <div class="tags"><span class="tag">Systems</span><span class="tag">SOPs</span><span class="tag">AI Tools</span></div>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">+</div>
+      <h3>Need Something Custom?</h3>
+      <p>Every business is different. Let's build the right support around your goals.</p>
+      <a class="btn-outline" href="#contact">Start the Conversation</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <span class="section-tag reveal">My Process</span>
+  <h2 class="section-title reveal">How we go from<br /><em>chaos to clarity.</em></h2>
+  <p class="section-subtitle reveal">I don't just take on tasks — I assess, build, optimize, and protect what you've built. Here's how every engagement starts.</p>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="step-num">01</div>
+      <h3>Audit &amp; Understand</h3>
+      <p>I start by understanding your business, bottlenecks, current systems, and goals before recommending anything.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-num">02</div>
+      <h3>Strategize &amp; Map</h3>
+      <p>We align on priorities. I document your processes, gaps, and a clear action plan tailored to your stage of growth.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-num">03</div>
+      <h3>Build &amp; Execute</h3>
+      <p>I build the systems, run the campaigns, set up the automations, and handle execution — without you chasing me.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-num">04</div>
+      <h3>Optimize &amp; Report</h3>
+      <p>I track performance, flag what's working and what's not, and proactively suggest improvements every step of the way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <span class="section-tag reveal">Why Clients Choose Me</span>
+  <h2 class="section-title reveal">Not just support.<br /><em>A genuine partner.</em></h2>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon">🎯</span>
+      <h3>One Person, Many Capabilities</h3>
+      <p>You don't have to hire five different specialists. I bridge lead generation, automations, appointment setting, executive support, and operations in one role — saving you time, money, and coordination headaches.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <span class="why-icon">🔒</span>
+      <h3>Reliability You Can Count On</h3>
+      <p>Every role I've held came with high-accuracy, high-stakes expectations. Whether it was HIPAA-compliant healthcare records or complex GoHighLevel workflows, I deliver without being chased or micromanaged.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <span class="why-icon">🗨️</span>
+      <h3>Clear, Proactive Communication</h3>
+      <p>You'll never wonder what I'm working on. I give regular updates, flag issues early, and always communicate in a way that keeps you informed without overwhelming your inbox.</p>
+    </div>
+    <div class="why-card reveal">
+      <span class="why-icon">⚙️</span>
+      <h3>Systems-First Thinking</h3>
+      <p>I don't just complete tasks — I build repeatable systems so your business can scale. Every workflow I set up is documented, optimized, and designed to last beyond our engagement.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <span class="why-icon">🌍</span>
+      <h3>Cross-Industry Experience</h3>
+      <p>Healthcare, real estate, tech support, digital marketing, and back-office operations. This breadth means I understand your business context — not just the tools I'm given.</p>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <span class="why-icon">🚀</span>
+      <h3>Growth-Oriented Execution</h3>
+      <p>I'm not here to maintain. I'm here to help you move forward — more leads, better conversions, cleaner operations, and a business that runs more smoothly every month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools">
+  <span class="section-tag reveal">Tools &amp; Platforms</span>
+  <h2 class="section-title reveal">I speak the language<br /><em>of your stack.</em></h2>
+  <p class="tools-subtitle reveal">Fluent across the platforms that power modern businesses.</p>
+  <div class="tools-grid">
+    <div class="tools-col reveal">
+      <h4>CRM &amp; Automation</h4>
+      <ul>
+        <li>GoHighLevel</li>
+        <li>Zapier</li>
+        <li>HubSpot (familiar)</li>
+        <li>Email + SMS Campaigns</li>
+        <li>Pipeline Management</li>
+      </ul>
+    </div>
+    <div class="tools-col reveal reveal-delay-1">
+      <h4>Project &amp; Ops</h4>
+      <ul>
+        <li>ClickUp</li>
+        <li>Trello</li>
+        <li>Notion</li>
+        <li>Monday.com</li>
+        <li>Google Workspace</li>
+        <li>Microsoft Office</li>
+      </ul>
+    </div>
+    <div class="tools-col reveal reveal-delay-2">
+      <h4>Marketing &amp; Ads</h4>
+      <ul>
+        <li>Meta Ads Manager</li>
+        <li>Funnels &amp; Landing Pages</li>
+        <li>Arcads</li>
+        <li>Artlist / VEO / Kling</li>
+        <li>CapCut / Final Cut Pro</li>
+      </ul>
+    </div>
+    <div class="tools-col reveal reveal-delay-3">
+      <h4>AI &amp; Research</h4>
+      <ul>
+        <li>Claude (Anthropic)</li>
+        <li>ChatGPT</li>
+        <li>Manus AI</li>
+        <li>Perplexity</li>
+        <li>Gemini</li>
+        <li>Seedstream / Artlist</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta" id="contact">
+  <span class="section-tag reveal">Let's Work Together</span>
+  <h2 class="section-title reveal">I might be the support<br />your business <em>is looking for.</em></h2>
+  <p class="cta-desc reveal">Whether you need someone to build your systems, run your lead gen, manage your operations, or make sure nothing falls through the cracks — let's talk. No fluff, just clarity.</p>
+  <div class="cta-buttons reveal">
+    <a class="btn-gold" href="mailto:ellenjoydcalaor@gmail.com">Email Me Directly</a>
+    <a class="btn-wa" href="https://wa.me/639619568203">WhatsApp Me</a>
+  </div>
+  <div class="contact-info reveal">
+    <div class="contact-info-item">
+      <p class="label">Email</p>
+      <p class="value"><a href="mailto:ellenjoydcalaor@gmail.com">ellenjoydcalaor@gmail.com</a></p>
+    </div>
+    <div class="contact-info-item">
+      <p class="label">Phone / WhatsApp</p>
+      <p class="value"><a href="https://wa.me/639619568203">+63 961 956 8203</a></p>
+    </div>
+    <div class="contact-info-item">
+      <p class="label">Based In</p>
+      <p class="value">Pavia, Iloilo, Philippines</p>
+    </div>
+    <div class="contact-info-item">
+      <p class="label">Availability</p>
+      <p class="value" style="color:var(--gold)">Open to New Clients</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://d1yei2z3i6k35z.cloudfront.net/17256137/69e9fc868f2f22.27209578_MyLogo.png" alt="Logo" />
+  <p>&copy; 2025 Ellen Joy Calaor · Fractional Growth &amp; Operations Partner</p>
+</footer>
+
+<script>
+  // Scroll nav style
+  const nav=document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  });
+
+  // Mobile menu
+  function toggleMenu(){
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // Reveal on scroll
+  const reveals=document.querySelectorAll('.reveal');
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+    });
+  },{threshold:0.12});
+  reveals.forEach(el=>observer.observe(el));
+</script>
 </body>
 </html>
